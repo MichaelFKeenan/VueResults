@@ -1,22 +1,24 @@
 <template>
   <div>
     <div>
+
       <h3>Filters</h3>
+      
       <div>
         <button @click="clearFilters()">Clear All</button>
       </div>
       <div>
         <button @click="filterProvider(null)">All Providers</button>
-        <button v-for="provider in providers" @click="filterProvider(provider.id)">{{provider.name}}</button>
+        <button v-for="provider in providers" @click="filterProvider(provider.id)">{{provider.name}} {{provider.id === providerStore.getSelectedProvider?.id ? '-' : ''}}</button>
       </div>
       <div>
         <button @click="filterColor(null)">All Colors</button>
-        <button v-for="color in colors" @click="filterColor(color.id)">{{color.name}}</button>
+        <button v-for="color in colors" @click="filterColor(color.id)">{{color.name}} {{color.id === colorStore.getSelectedColor?.id ? '-' : ''}}</button>
       </div>
     </div>
 
     <h3>Results</h3>
-    
+
     <ul>
       <li v-for="result in filteredResults">
         <ResultRow :result="result" />
@@ -32,8 +34,14 @@ import providers from "../data/providers";
 import colors from "../data/colors";
 import type { Result } from "../types/Result";
 
-const selectedProviderId = ref(null);
+import { mapState } from 'pinia'
+import { useProviderStore } from '../stores/providers'
+import { useColorStore } from '../stores/colors'
+
 const selectedColorId = ref(null);
+
+const providerStore = useProviderStore();
+const colorStore = useColorStore();
 
 const results = [
   { id: 1, name: "item 1", provider: providers[0], color: colors[1] },
@@ -46,24 +54,24 @@ const filteredResults = computed(() => {
 })
 
 const filterProviders = (result: any) => {
-  return selectedProviderId.value == null || result.provider.id === selectedProviderId.value;
+  return providerStore.getSelectedProvider == null || result.provider.id === providerStore.getSelectedProvider.id;
 }
 
 const filterColors = (result: any) => {
-  return selectedColorId.value == null || result.color.id === selectedColorId.value;
+  return colorStore.getSelectedColor == null || result.color.id === colorStore.getSelectedColor.id;
 }
 
 function filterProvider(id: number) {
-  this.selectedProviderId = id;
+  providerStore.selectProvider(id);
 }
 
 function filterColor(id: number) {
-  this.selectedColorId = id;
+  colorStore.selectColor(id);
 }
 
 function clearFilters() {
-  this.selectedProviderId = null;
-  this.selectedColorId = null;
+  colorStore.clear();
+  providerStore.clear();
 }
 </script>
 
