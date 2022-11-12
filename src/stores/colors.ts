@@ -13,10 +13,12 @@ export const useColorStore = defineStore('colors', {
         {
           id: 1,
           name: "green",
+          amountOfFilteredDealsMatching: 0
         },
         {
           id: 2,
           name: "blue",
+          amountOfFilteredDealsMatching: 0
         },
       ],
       selectedColorId: null

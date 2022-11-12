@@ -1,0 +1,4 @@
+- make filters reactive, show how many filtered results match each provider/color. Any issues with circular dependency?
+- seperate filters and results components
+- move each filter into own component
+- deploy via kubes

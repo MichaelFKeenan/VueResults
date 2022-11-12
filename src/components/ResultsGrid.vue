@@ -37,29 +37,17 @@ import type { Result } from "../types/Result";
 import { mapState } from 'pinia'
 import { useProviderStore } from '../stores/providers'
 import { useColorStore } from '../stores/colors'
+import { useResultsStore } from '../stores/results'
 
 const selectedColorId = ref(null);
 
 const providerStore = useProviderStore();
 const colorStore = useColorStore();
-
-const results = [
-  { id: 1, name: "item 1", provider: providers[0], color: colors[1] },
-  { id: 2, name: "item 2", provider: providers[0], color: colors[0] },
-  { id: 3, name: "item 3", provider: providers[1], color: colors[0] }
-];
+const resultsStore = useResultsStore();
 
 const filteredResults = computed(() => {
-  return results.filter(x => filterProviders(x) && filterColors(x));
+  return resultsStore.getfilteredResults;
 })
-
-const filterProviders = (result: any) => {
-  return providerStore.getSelectedProvider == null || result.provider.id === providerStore.getSelectedProvider.id;
-}
-
-const filterColors = (result: any) => {
-  return colorStore.getSelectedColor == null || result.color.id === colorStore.getSelectedColor.id;
-}
 
 function filterProvider(id: number) {
   providerStore.selectProvider(id);

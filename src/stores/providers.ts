@@ -13,10 +13,12 @@ export const useProviderStore = defineStore('providers', {
         {
           id: 1,
           name: "provider 1",
+          amountOfFilteredDealsMatching: 0
         },
         {
           id: 2,
           name: "provider 2",
+          amountOfFilteredDealsMatching: 0
         },
       ],
       selectedProviderId: null
