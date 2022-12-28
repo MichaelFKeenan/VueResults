@@ -1,9 +1,9 @@
 import type { Provider } from "./Provider";
-import type { Color } from "./Color";
+import type { Speed } from "./Speed";
 
 export type Result = {
     id: number,
     name: string,
     provider: Provider,
-    color: Color
+    speed: Speed
 }

@@ -1,5 +1,5 @@
 <template>
-  <p>{{ result.id }}, {{ result.name }}, {{result.provider.name}}, {{result.color.name}}</p>
+  <p>{{ result.id }}, {{ result.name }}, {{result.provider.name}}, {{result.speed.name}}</p>
 </template>
 
 <script setup lang="ts">

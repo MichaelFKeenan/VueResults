@@ -1,14 +1,14 @@
-import type { Provider } from "../types/Provider";
+import type { Speed } from "../types/Speed";
 
-const data: Provider[] = [
+const data: Speed[] = [
   {
     id: 1,
-    name: "blue",
+    name: "30mb",
     amountOfFilteredDealsMatching: 0
   },
   {
     id: 2,
-    name: "red",
+    name: "50mb",
     amountOfFilteredDealsMatching: 0
   },
 ];
