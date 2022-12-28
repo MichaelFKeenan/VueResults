@@ -1,5 +1,7 @@
 <template>
   <div>
+    <h3>Filters</h3>
+
     <div>
       <button @click="clearFilters()">Clear All</button>
     </div>
@@ -7,6 +9,7 @@
     <ProviderFilter />
 
     <SpeedFilter />
+    
   </div>
 </template>
 

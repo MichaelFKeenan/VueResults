@@ -1,7 +1,8 @@
 <template>
   <div>
-    <button @click="filterProvider(null)">All Providers</button>
-    <button v-for="provider in providers" @click="filterProvider(provider.id)">
+    <p><b>Provider</b></p>
+    <button @click="filterProvider(null)">All</button>
+    <button v-for="provider in providers" @click="filterProvider(provider.id)" class="filter-btn">
       {{ provider.name }}
       {{ provider.id === providerStore.getSelectedProvider?.id ? "-" : "" }}
       ({{ provider.amountOfFilteredDealsMatching }})
@@ -35,3 +36,9 @@ function filterProvider(id: number) {
   providerStore.selectProvider(id);
 }
 </script>
+
+<style scoped>
+.filter-btn {
+  display: block;
+}
+</style>

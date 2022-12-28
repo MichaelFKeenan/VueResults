@@ -1,18 +1,16 @@
 <template>
-  <div>
-    <div>
-      <h3>Filters</h3>
-
+  <div class="results-grid">
+    <div class="results-grid__filters">
       <FiltersList />
     </div>
 
-    <h3>Results</h3>
-
-    <ul>
-      <li v-for="result in results">
-        <ResultRow :result="result" />
-      </li>
-    </ul>
+    <div class="results-grid__deals">
+      <ul>
+        <li v-for="result in results">
+          <ResultRow :result="result" />
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -35,9 +33,15 @@ const results = computed(() => {
 </script>
 
 <style scoped>
-h1 {
-  font-weight: 500;
-  font-size: 2.6rem;
-  top: -10px;
+.results-grid {
+  display: flex;
+}
+
+.results-grid__filters {
+  width: 20%;
+}
+
+.results-grid__deals {
+  width:80%;
 }
 </style>

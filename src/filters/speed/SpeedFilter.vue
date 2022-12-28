@@ -1,7 +1,8 @@
 <template>
   <div>
-    <button @click="filterSpeed(null)">All Speeds</button>
-    <button v-for="speed in speeds" @click="filterSpeed(speed.id)">
+    <p><b>Speed</b></p>
+    <button @click="filterSpeed(null)">All</button>
+    <button v-for="speed in speeds" @click="filterSpeed(speed.id)" class="filter-btn">
       {{ speed.name }}
       {{ speed.id === speedStore.getSelectedSpeed?.id ? "-" : "" }}
       ({{ speed.amountOfFilteredDealsMatching }})
@@ -36,3 +37,9 @@ function filterSpeed(id: number) {
   speedStore.selectSpeed(id);
 }
 </script>
+
+<style scoped>
+.filter-btn {
+  display: block;
+}
+</style>

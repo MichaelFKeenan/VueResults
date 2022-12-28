@@ -3,7 +3,13 @@ import ResultsGrid from './components/ResultsGrid.vue'
 </script>
 
 <template>
-  <main>
+  <main class="main-container">
     <ResultsGrid />
   </main>
 </template>
+
+<style scoped>
+.main-container {
+  width: 100%;
+}
+</style>
