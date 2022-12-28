@@ -39,18 +39,5 @@ export const useProviderStore = defineStore("providers", {
     clear() {
       this.selectedProviderId = null;
     },
-    filterResults(results: Result[]): Result[] {
-      return results.filter(
-        (x) =>
-          this.getSelectedProvider == null ||
-          x.provider.id === this.getSelectedProvider.id
-      );
-    },
-    filterResult(result: Result): boolean {
-      return (
-        this.getSelectedProvider == null ||
-        result.provider.id === this.getSelectedProvider.id
-      );
-    },
   },
 });

@@ -41,14 +41,5 @@ export const useSpeedStore = defineStore("speeds", {
     clear() {
       this.selectedSpeedId = null;
     },
-    filterResults(results: Result[]): Result[] {
-      return results.filter(
-        (x) =>
-          this.getSelectedSpeed == null || x.speed.id === this.getSelectedSpeed.id
-      );
-    },
-    filterResult(result: Result): boolean {
-      return this.getSelectedSpeed == null || result.speed.id === this.getSelectedSpeed.id
-    },
   },
 });
