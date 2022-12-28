@@ -1,7 +1,8 @@
 import type { Provider } from "@/types/Provider";
 import { defineStore } from "pinia";
-
-import { useResultsStore } from "./results";
+import mockProviders from "@/mockData/providers";
+import { useResultsStore } from "@/stores/resultStore";
+import type { Result } from "@/types/Result";
 
 interface State {
   providers: Provider[];
@@ -11,18 +12,7 @@ interface State {
 export const useProviderStore = defineStore("providers", {
   state: (): State => {
     return {
-      providers: [
-        {
-          id: 1,
-          name: "provider 1",
-          amountOfFilteredDealsMatching: 0,
-        },
-        {
-          id: 2,
-          name: "provider 2",
-          amountOfFilteredDealsMatching: 0,
-        },
-      ],
+      providers: mockProviders,
       selectedProviderId: null,
     };
   },
@@ -48,6 +38,19 @@ export const useProviderStore = defineStore("providers", {
     },
     clear() {
       this.selectedProviderId = null;
+    },
+    filterResults(results: Result[]): Result[] {
+      return results.filter(
+        (x) =>
+          this.getSelectedProvider == null ||
+          x.provider.id === this.getSelectedProvider.id
+      );
+    },
+    filterResult(result: Result): boolean {
+      return (
+        this.getSelectedProvider == null ||
+        result.provider.id === this.getSelectedProvider.id
+      );
     },
   },
 });

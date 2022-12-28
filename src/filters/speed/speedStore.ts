@@ -1,7 +1,9 @@
 import type { Speed } from "@/types/Speed";
 import { defineStore } from "pinia";
 
-import { useResultsStore } from "./results";
+import mockSpeeds from "@/mockData/speeds";
+import { useResultsStore } from "@/stores/resultStore";
+import type { Result } from "@/types/Result";
 
 interface State {
   speeds: Speed[];
@@ -11,18 +13,7 @@ interface State {
 export const useSpeedStore = defineStore("speeds", {
   state: (): State => {
     return {
-      speeds: [
-        {
-          id: 1,
-          name: "30mb",
-          amountOfFilteredDealsMatching: 0,
-        },
-        {
-          id: 2,
-          name: "50mb",
-          amountOfFilteredDealsMatching: 0,
-        },
-      ],
+      speeds: mockSpeeds,
       selectedSpeedId: null,
     };
   },
@@ -30,12 +21,14 @@ export const useSpeedStore = defineStore("speeds", {
     getSpeeds: (state) => {
       const resultsStore = useResultsStore();
       const speeds = state.speeds;
+
       speeds.forEach((speed) => {
         speed.amountOfFilteredDealsMatching =
           resultsStore.getfilteredResults.filter(
             (x) => x.speed.id === speed.id
           ).length;
       });
+
       return speeds;
     },
     getSelectedSpeed: (state) =>
@@ -47,6 +40,15 @@ export const useSpeedStore = defineStore("speeds", {
     },
     clear() {
       this.selectedSpeedId = null;
+    },
+    filterResults(results: Result[]): Result[] {
+      return results.filter(
+        (x) =>
+          this.getSelectedSpeed == null || x.speed.id === this.getSelectedSpeed.id
+      );
+    },
+    filterResult(result: Result): boolean {
+      return this.getSelectedSpeed == null || result.speed.id === this.getSelectedSpeed.id
     },
   },
 });
